@@ -16,10 +16,18 @@ A standalone Windows desktop application for managing your Bitbucket repositorie
 ## Prerequisites
 
 - Python 3.9 or higher
-- A [Bitbucket API Token](https://id.atlassian.com/manage-profile/security/api-tokens) — create one at Bitbucket → Settings → Atlassian account → Security → API tokens, with the following scopes:
-  - **Account**: Read
-  - **Repositories**: Read, Write, Admin
-  - **Projects**: Read
+- A [Bitbucket API Token](https://id.atlassian.com/manage-profile/security/api-tokens) with the following scopes:
+
+  | Level | Scope |
+  |-------|-------|
+  | **Admin** | `admin:repository:bitbucket` |
+  | **Read** | `read:account` |
+  | | `read:me` |
+  | | `read:project:bitbucket` |
+  | | `read:repository:bitbucket` |
+  | | `read:user:bitbucket` |
+  | | `read:workspace:bitbucket` |
+  | **Write** | `write:repository:bitbucket` |
 
 ## Installation
 
