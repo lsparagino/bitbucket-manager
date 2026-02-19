@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitbucket Manager</title>
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/views.css">
+</head>
+
+<body>
+
+    <!-- ═══════════════ LOGIN VIEW ═══════════════ -->
+    <div id="view-login" class="login-wrap">
+        <div class="login-card">
+            <div class="login-logo">
+                <svg viewBox="0 0 32 32">
+                    <path
+                        d="M2.58 4.31a1 1 0 0 0-1 1.16l4.36 26.5a1.36 1.36 0 0 0 1.33 1.12h17.94a1 1 0 0 0 1-.85l4.36-26.77a1 1 0 0 0-1-1.16zm17.54 19.38h-8.19l-2.21-11.56h12.48z"
+                        fill="#2684FF" />
+                </svg>
+            </div>
+            <h1>Bitbucket Manager</h1>
+            <p class="subtitle">Sign in with your Bitbucket API Token</p>
+            <div id="login-error" class="login-error"></div>
+            <div class="form-group">
+                <label for="login-email">Atlassian Email</label>
+                <input type="email" id="login-email" placeholder="your.email@company.com" autocomplete="username">
+                <div class="form-help">The email on your Atlassian account</div>
+            </div>
+            <div class="form-group">
+                <label for="login-token">API Token</label>
+                <input type="password" id="login-token" placeholder="Paste your API token"
+                    autocomplete="current-password">
+                <div class="form-help">Create one at Bitbucket → Settings → Atlassian account → Security → API tokens
+                </div>
+            </div>
+            <button class="btn btn-primary" id="login-btn" onclick="doLogin()">Sign in</button>
+        </div>
+    </div>
+
+    <!-- ═══════════════ APP SHELL ═══════════════ -->
+    <div id="app-shell" class="hidden">
+
+        <!-- Top Nav -->
+        <div class="topnav">
+            <div class="topnav-logo">
+                <svg viewBox="0 0 32 32">
+                    <path
+                        d="M2.58 4.31a1 1 0 0 0-1 1.16l4.36 26.5a1.36 1.36 0 0 0 1.33 1.12h17.94a1 1 0 0 0 1-.85l4.36-26.77a1 1 0 0 0-1-1.16zm17.54 19.38h-8.19l-2.21-11.56h12.48z"
+                        fill="white" />
+                </svg>
+                Bitbucket Manager
+            </div>
+            <div class="topnav-spacer"></div>
+            <div class="topnav-user">
+                <span id="user-display-name"></span>
+                <button class="topnav-btn" onclick="doLogout()">Sign out</button>
+            </div>
+        </div>
+
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs" id="breadcrumbs"></div>
+
+        <!-- Main Content -->
+        <div class="content" id="main-content"></div>
+
+    </div>
+
+    <!-- ═══════════════ MODAL ═══════════════ -->
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modal-title"></h2>
+                <button class="modal-close" onclick="closeModal()">✕</button>
+            </div>
+            <div class="modal-body" id="modal-body"></div>
+            <div class="modal-footer" id="modal-footer"></div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="toast"></div>
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>

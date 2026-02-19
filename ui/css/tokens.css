@@ -1,0 +1,174 @@
+/* ── Atlassian Design Tokens ──────────────────────────────────── */
+:root {
+    --blue-700: #0052CC;
+    --blue-600: #0065FF;
+    --blue-500: #0747A6;
+    --blue-100: #DEEBFF;
+    --blue-50: #E6F0FF;
+    --neutral-900: #091E42;
+    --neutral-800: #172B4D;
+    --neutral-700: #253858;
+    --neutral-600: #344563;
+    --neutral-500: #42526E;
+    --neutral-400: #505F79;
+    --neutral-300: #5E6C84;
+    --neutral-200: #6B778C;
+    --neutral-100: #7A869A;
+    --neutral-80: #97A0AF;
+    --neutral-60: #B3BAC5;
+    --neutral-40: #C1C7D0;
+    --neutral-30: #DFE1E6;
+    --neutral-20: #EBECF0;
+    --neutral-10: #FAFBFC;
+    --green-500: #00875A;
+    --green-100: #ABF5D1;
+    --green-50: #E3FCEF;
+    --red-500: #DE350B;
+    --red-100: #FFBDAD;
+    --red-50: #FFEBE6;
+    --yellow-500: #FF8B00;
+    --purple-500: #5243AA;
+    --teal-500: #00B8D9;
+    --bg-nav: #2684FF;
+    --bg-nav-dark: #0052CC;
+    --radius-sm: 3px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --shadow-sm: 0 1px 2px rgba(9, 30, 66, .13);
+    --shadow-md: 0 4px 8px -2px rgba(9, 30, 66, .13), 0 0 1px rgba(9, 30, 66, .2);
+    --shadow-lg: 0 8px 16px -4px rgba(9, 30, 66, .13), 0 0 1px rgba(9, 30, 66, .2);
+    --transition: 0.15s ease-in-out;
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, "Helvetica Neue", sans-serif;
+}
+
+/* ── Reset ────────────────────────────────────────────────────── */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font);
+    background: var(--neutral-10);
+    color: var(--neutral-800);
+    font-size: 14px;
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+/* ── Top Nav ──────────────────────────────────────────────────── */
+.topnav {
+    background: linear-gradient(135deg, var(--bg-nav-dark) 0%, var(--bg-nav) 100%);
+    height: 56px;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .15);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.topnav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+}
+
+.topnav-logo svg {
+    width: 28px;
+    height: 28px;
+    fill: white;
+}
+
+.topnav-spacer {
+    flex: 1;
+}
+
+.topnav-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+.topnav-user img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, .3);
+}
+
+.topnav-btn {
+    background: rgba(255, 255, 255, .15);
+    border: 1px solid rgba(255, 255, 255, .25);
+    color: white;
+    padding: 6px 14px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 13px;
+    transition: background var(--transition);
+}
+
+.topnav-btn:hover {
+    background: rgba(255, 255, 255, .25);
+}
+
+/* ── Breadcrumbs ──────────────────────────────────────────────── */
+.breadcrumbs {
+    padding: 14px 32px;
+    background: white;
+    border-bottom: 1px solid var(--neutral-30);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+}
+
+.breadcrumbs a {
+    color: var(--blue-700);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color var(--transition);
+}
+
+.breadcrumbs a:hover {
+    color: var(--blue-600);
+    text-decoration: underline;
+}
+
+.breadcrumbs .sep {
+    color: var(--neutral-60);
+    margin: 0 2px;
+}
+
+.breadcrumbs .current {
+    color: var(--neutral-800);
+    font-weight: 600;
+}
+
+/* ── Content ──────────────────────────────────────────────────── */
+.content {
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 28px 32px;
+}
+
+.content-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.content-header h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--neutral-900);
+}
