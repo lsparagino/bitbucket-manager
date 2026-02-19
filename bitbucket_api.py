@@ -108,7 +108,7 @@ class BitbucketAPI:
                     timeout=15,
                 )
                 if resp.status_code == 200:
-                    print(f"[AUTH] ✓ Success with: {strat['name']}")
+                    print(f"[AUTH] OK - Success with: {strat['name']}")
                     self._session.auth = strat["auth"]
                     if strat["headers"]:
                         self._session.headers.update(strat["headers"])

@@ -16,9 +16,15 @@ async function api(method, ...args) {
 }
 
 function waitForPywebview() {
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     if (window.pywebview && window.pywebview.api) return resolve();
-    window.addEventListener('pywebviewready', resolve, { once: true });
+    const timeout = setTimeout(() => {
+      reject(new Error('pywebview bridge not available after 10s'));
+    }, 10000);
+    window.addEventListener('pywebviewready', () => {
+      clearTimeout(timeout);
+      resolve();
+    }, { once: true });
   });
 }
 
@@ -86,8 +92,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   $('login-token').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
 
   // Try auto-login from saved credentials
-  const result = await api('check_saved_credentials');
-  handleLoginResult(result);
+  try {
+    const result = await api('check_saved_credentials');
+    handleLoginResult(result);
+  } catch (err) {
+    console.error('Auto-login failed:', err);
+    showLoginError('Bridge error: ' + err.message);
+  }
 });
 
 /* ── Workspaces ───────────────────────────────────────────────── */

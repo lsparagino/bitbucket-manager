@@ -17,7 +17,16 @@ args = [
     "--name=BitbucketManager",
     "--onefile",
     "--windowed",
+    # Bundle the UI directory
     "--add-data", f"{os.path.join(BASE_DIR, 'ui')};ui",
+    # Bundle SSL certificates (required for requests HTTPS calls)
+    "--collect-data", "certifi",
+    # Bundle pywebview data files
+    "--collect-data", "pywebview",
+    # Hidden imports for pywebview's WinForms/Chromium backend
+    "--hidden-import", "clr",
+    "--hidden-import", "pythonnet",
+    "--hidden-import", "webview",
 ]
 
 # Add icon if it exists
@@ -32,3 +41,4 @@ args.append("--clean")
 print("Building BitbucketManager.exe ...")
 PyInstaller.__main__.run(args)
 print("\nDone! Executable is at: dist/BitbucketManager.exe")
+
