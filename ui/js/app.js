@@ -118,7 +118,7 @@ async function loadWorkspaces() {
     <div class="content-header"><h1>Your Workspaces</h1></div>
     <div class="card-grid">
       ${result.values.map(ws => `
-        <div class="card" onclick="loadProjects('${ws.slug}', '${esc(ws.name)}')">
+        <div class="card" onclick="loadProjects('${esc(ws.slug)}', '${esc(ws.name)}')">
           <div class="card-header">
             <div class="card-avatar">
               ${ws.links?.avatar?.href
@@ -486,13 +486,23 @@ function showLoading() {
 }
 
 function showError(msg) {
+  const id = 'err-' + Math.random().toString(36).slice(2, 9);
   $('main-content').innerHTML = `
-    <div class="empty-state">
+    <div class="empty-state" style="max-width:900px">
       <h3>Something went wrong</h3>
-      <p>${esc(msg)}</p>
+      <div class="git-cmd" style="margin-top:12px;text-align:left">
+        <div class="git-cmd-row">
+          <div class="git-cmd-code" id="${id}"
+               style="white-space:pre-wrap;word-break:break-all;max-height:300px;overflow:auto;user-select:text">${esc(msg)}</div>
+          <button class="copy-btn" onclick="copyCmd('${id}', this)" title="Copy to clipboard">
+            <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"/><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"/></svg>
+          </button>
+        </div>
+      </div>
       <button class="btn btn-secondary" style="margin-top:12px" onclick="loadWorkspaces()">Back to Workspaces</button>
     </div>
   `;
+  console.error('[app]', msg);
 }
 
 function toast(msg, type = '') {

@@ -169,8 +169,23 @@ class BitbucketAPI:
     # ── Workspaces ───────────────────────────────────────────────────
 
     def get_workspaces(self):
-        """List all workspaces the user belongs to."""
-        return self._paginated_get("/workspaces")
+        """List all workspaces the user belongs to.
+
+        Uses /user/workspaces. Both /2.0/workspaces and
+        /2.0/user/permissions/workspaces were sunset by CHANGE-2770 on
+        2026-04-14 and return 410. Entries come back as
+        {type, administrator, workspace: {...}}; unwrap the nested workspace.
+        """
+        result = self._paginated_get("/user/workspaces")
+        if not result.get("ok"):
+            return result
+        values = []
+        for entry in result.get("values", []):
+            ws = entry.get("workspace") or {}
+            if "administrator" in entry:
+                ws["administrator"] = entry["administrator"]
+            values.append(ws)
+        return {"ok": True, "values": values}
 
     # ── Projects ─────────────────────────────────────────────────────
 
@@ -298,7 +313,10 @@ class BitbucketAPI:
                 resp = self._session.get(url, params=params, timeout=15)
                 params = None  # only use params on the first request
                 if resp.status_code != 200:
-                    return {"ok": False, "error": f"API error ({resp.status_code})"}
+                    body = resp.text[:300].replace("\n", " ")
+                    err = f"API error ({resp.status_code}) on {resp.url} — {body}"
+                    print(f"[API] {err}")
+                    return {"ok": False, "error": err}
                 data = resp.json()
                 all_values.extend(data.get("values", []))
                 url = data.get("next")
